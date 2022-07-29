@@ -7,7 +7,7 @@ using namespace sf;
 const int BOARD_WIDTH = 10;
 const int BOARD_HEIGHT = 20;
 
-std::vector<std::vector<char>> board(BOARD_HEIGHT, std::vector<char>(BOARD_HEIGHT));
+std::vector<std::vector<char>> board(BOARD_HEIGHT, std::vector<char>(BOARD_WIDTH));
 
 // x, y pair
 // player is current pos, shadow is your potential next pos
@@ -19,8 +19,10 @@ Have the player passed in as param (i dont like global vars :) )
 */
 bool isLegal() {
     for (int i = 0; i < 4; i++) {
-        // Clamp player down to only move within playable area
-        if (player[i].first < 0 || player[i].first >= BOARD_WIDTH || player[i].second >= BOARD_HEIGHT) return false;
+        if (
+            player[i].first < 0 || 
+            player[i].first >= BOARD_WIDTH || 
+            player[i].second >= BOARD_HEIGHT) return false;
         else if (board[player[i].second][player[i].first]) return false;
     }
     return true;
